@@ -31,7 +31,7 @@ async function run() {
     await client.connect();
     const  firstCollection = client.db('beatrix').collection('first');
     const  middleCollection = client.db('beatrix').collection('middle');
-
+    const  todaysCollection = client.db('beatrix').collection('todays');
 
     app.get('/first', async(req,res)=>{
         const corsor = firstCollection.find();
@@ -45,7 +45,11 @@ async function run() {
       res.send(result)
   })
 
-
+  app.get('/todays', async(req,res)=>{
+    const corsor = todaysCollection.find();
+    const result = await corsor.toArray();
+    res.send(result)
+})
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     // console.log("Pinged your deployment. You successfully connected to MongoDB!");
