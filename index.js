@@ -30,6 +30,8 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     const  firstCollection = client.db('beatrix').collection('first');
+    const  middleCollection = client.db('beatrix').collection('middle');
+
 
     app.get('/first', async(req,res)=>{
         const corsor = firstCollection.find();
@@ -37,7 +39,11 @@ async function run() {
         res.send(result)
     })
 
-
+    app.get('/middle', async(req,res)=>{
+      const corsor = middleCollection.find();
+      const result = await corsor.toArray();
+      res.send(result)
+  })
 
 
     // Send a ping to confirm a successful connection
